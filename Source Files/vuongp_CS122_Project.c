@@ -72,6 +72,7 @@ int ButtonPress(int state){
 }
 
 enum KStates {WaitP,WaitR,Fin,F};
+//determines the state depending on keypress
 int keys(int state){
 	switch (state){ //transitions
 		case WaitP:
@@ -127,6 +128,8 @@ int keys(int state){
 	return state;
 }
 
+//Displaying the time on LCD screen
+// automatically calculate time from initial inputted time
 enum TStates {ClkW,Init};
 int settime(int state){
 	
@@ -143,16 +146,8 @@ int settime(int state){
 		}
 		break;
 		case Init:
-		//if(aflg)
-		//	state= Pause;
-		//else
 		state=Init;
 		break;
-		//case Pause:
-		//if(tflg)
-		//	state= Init;
-		//else
-		//	state= Pause;
 	}
 	switch(state){
 		case Init:
@@ -207,6 +202,7 @@ int settime(int state){
 	return state;
 }
 
+//displaying the Altitude on LCD
 enum AStates{AltW,A1,A2};
 int Altimeter (int state){
 	switch(state){ //transitions
@@ -261,12 +257,14 @@ int Altimeter (int state){
 	} //end actions
 	return state;
 }
+
 int x=0;
-unsigned char msg[50];
+unsigned char msg[50]; //used with LCD display
 unsigned char prev='\0';
 unsigned char prevc='\0';
 int c=1;
 int cnt0,cnt1,cnt2,cnt3,cnt4,cnt5,cnt6,cnt7,cnt8,cnt9=0;
+// standard letters on the keypad 
 unsigned char one[4]={'1','1','1','1'};
 unsigned char zero[4]={'0','0','0','0'};
 unsigned char two[4]={'a','b','c','2'};
@@ -279,7 +277,7 @@ unsigned char eight[4]={'t','u','v','8'};
 unsigned char nine[5]={'w','x','y','z','9'};
 
 enum Mstates{MWait,press,release,space,show_msg};
-
+//display typed message on LCD
 int Msgstate (int state)
 {
 	switch (state){ //Transitions
